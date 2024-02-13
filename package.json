@@ -1,0 +1,10 @@
+{
+  "name": "studies-apis",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "main": "index.js",
+  "license": "MIT"
+}
