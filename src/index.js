@@ -1,23 +1,10 @@
+import searchWithCache from "./cacheApi/cacheMethod.js";
+
 
 const url = "https://jsonplaceholder.typicode.com/posts";
 
+const search = searchWithCache(url);
 
-const cache = new Map();
+console.log(search, 3)
 
-
-const search = async (id) => {
-    if(cache.has(id)) return cache.get(id);
-
-    // search in api
-    const res = await fetch(url);
-    const data = await res.json();
-    
-    // update cache
-    cache.set(id,data);
-    console.log(data)
-    return data
-
-};
-
-search()
 
