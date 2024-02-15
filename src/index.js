@@ -5,6 +5,5 @@ const url = "https://jsonplaceholder.typicode.com/posts";
 
 const search = searchWithCache(url);
 
-console.log(search.then(data => console.log(data)))
 
 
