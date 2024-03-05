@@ -1,6 +1,6 @@
 import http from "node:http";
 import quotes from "./quotes.js"
-
+import { Url } from "node:url";
 
 
 const port = 3000;
@@ -14,6 +14,7 @@ const port = 3000;
     - "application/json"
     - "image/jpeg, image/png, image/gif"
 */
+
 
 const server  = http.createServer((req, res) => {
     if(req.url === "/"){
