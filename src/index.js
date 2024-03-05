@@ -1,41 +1,25 @@
 import http from "node:http";
+import url from "node:url";
 import quotes from "./quotes.js"
-import { Url } from "node:url";
 
 
 const port = 3000;
 
-/*
-    Headers 
-    - "text/plain"
-    - "text/html"
-    - "application/xml"
-    - "multipart/form-data"
-    - "application/json"
-    - "image/jpeg, image/png, image/gif"
-*/
-
-
 const server  = http.createServer((req, res) => {
-    if(req.url === "/"){
-        res.statusCode = 200
-        res.setHeader("Content-Type", "text/html")
-        res.end("Hello")
-        return;
-    }
-    if(req.url === "/quotes" && req.method === "GET"){
+    const parsedUrl = url.parse(req.url, true);
 
-        res.statusCode = 200
-        res.setHeader("Content-Type", "application/json")
-        res.end(JSON.stringify(quotes))
-    }else{
-        res.statusCode = 400
-        res.setHeader("Content-Type", "text/html")
-        res.end("Not Found")
-        return;
-    }
-})
+  const queryParams = parsedUrl.query;
+
+  if (Object.keys(queryParams).length > 0) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end(`Parâmetros da URL: ${JSON.stringify(queryParams)}\n`);
+  } else {
+    res.statusCode = 404;
+    res.end('Nenhum parâmetro encontrado na URL\n');
+  }
+});
 
 server.listen(port, ()=> {
-    console.log(`Server running at http://localhost:${port}/`);
+    console.log(`Server running at http://localhost:${port}/?nome=Joao&idade=30`);
 })
